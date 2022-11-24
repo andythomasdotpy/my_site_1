@@ -39,10 +39,7 @@ def posts(request):
 def post_detail(request, slug):
     my_posts = dummy_data.posts
 
-    print(slug)
-
     identified_post = next(item for item in my_posts if item["slug"] == slug)
-    print(identified_post)
 
 
     return render(request, "blog_1/post-detail.html", 
