@@ -27,10 +27,17 @@
         <h2>My Latest Thoughts</h2>
 
         <ul>
-            {% for post in posts %}
+            {% for post in posts_db %}
                 {% include "blog_1/includes/post.html" %}
             {% endfor %}
         </ul>
+        {% comment %} 
+        <ul>
+            {% for post_db in posts_db %}
+                {% include "blog_1/includes/post.html" %}
+            {% endfor %}
+        </ul> 
+        {% endcomment %}
     </section>
 
 
