@@ -23,9 +23,6 @@ def starting_page(request):
 
     print("-------------------------")
 
-    # for post in my_posts:
-    #     print(post['date'])
-
 
     sorted_list = sorted(my_posts, key=helpers)
     sorted_list_db = sorted(my_posts_db, key=helpers_db)
@@ -63,20 +60,9 @@ def post_detail(request, slug):
     my_posts = dummy_data.posts
     my_posts_db = Post.objects.all()
 
-    # print(my_posts_db[0].slug)
-
-    # for item in my_posts_db:
-    #     print(f"{item.slug}, {slug}")
-    #     if item.slug == slug:
-    #         print(item.slug)
-    #     else:
-    #         print("no")
-
 
     # identified_post = next(item for item in my_posts if item["slug"] == slug)
     identified_post_db = next(item for item in my_posts_db if item.slug == slug)
-
-    # print(identified_post_db)
 
 
     return render(request, "blog_1/post-detail.html", 
