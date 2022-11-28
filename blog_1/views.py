@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Post
 import my_site_1.dummy_data as dummy_data
 
 
@@ -10,6 +11,8 @@ def helpers(a):
 
 def starting_page(request):
     my_posts = dummy_data.posts
+    my_posts_db = Post.objects.all()
+    print(my_posts_db)
 
 
     sorted_list = sorted(my_posts, key=helpers)
