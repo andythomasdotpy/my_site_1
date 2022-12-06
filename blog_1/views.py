@@ -16,9 +16,6 @@ def starting_page(request):
 
     latest_posts = sorted_list[-3:]
 
-    for post in latest_posts:
-        print(post['date'])
-        print(type(post['image']))
     
     return render(request, "blog_1/index.html",
     {
