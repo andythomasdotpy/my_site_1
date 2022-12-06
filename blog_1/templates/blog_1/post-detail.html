@@ -14,7 +14,7 @@
     <section id="summary">
         <h2>{{ single_post.title}}</h2>
         <div>
-            {% for tag in tags %}
+            {% for tag in get_tags %}
                 <span class="tag"> {{ tag }} </span>
             {% endfor %}
         </div>
