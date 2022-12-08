@@ -3,6 +3,7 @@ from django.views.generic.list import ListView
 from django.views.generic import DetailView
 
 from .models import Post, Tag
+from .forms import CommentForm
 
 # import my_site_1.dummy_data as dummy_data
 
@@ -43,6 +44,7 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["get_tags"] = self.object.tags.all()
+        context["comment_form"] = CommentForm()
         return context
 
 
