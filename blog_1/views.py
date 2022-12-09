@@ -52,8 +52,7 @@ class AllPostsView(ListView):
 
 # Now we create manual view to create our own logic
 class PostDetailView(View):
-    def func_context(self, slug):
-        post = Post.objects.get(slug=slug)
+    def func_context(self, post):
         context = {
             "single_post": post,
             "get_tags": post.tags.all(),
@@ -64,15 +63,14 @@ class PostDetailView(View):
 
 
     def get(self, request, slug):
-        # post = Post.objects.get(slug=slug)
-        context = self.func_context(slug)
+        post = Post.objects.get(slug=slug)
+        context = self.func_context(post)
         return render(request, "blog_1/post-detail.html", context)
 
 
     def post(self, request, slug):
         comment_form = CommentForm(request.POST)
         post = Post.objects.get(slug=slug)
-        print(post)
 
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)      # commit equals false will prevent saving to the database but will create a new model instance, since we have exclded post (in form) we need to link it to post before saving
@@ -81,13 +79,7 @@ class PostDetailView(View):
 
             return HttpResponseRedirect(reverse("post-detail-page", args=[slug]))
 
-        context = {
-            "single_post": post,
-            "get_tags": post.tags.all(),
-            "comment_form": comment_form,
-            "comments": post.comments.all().order_by("-id"),    # we also place comments here in the case of failed validation and post request is reloaided
-        }
-
+        context = self.func_context(post)
         return render(request, "blog_1/post-detail.html", context)
     
 
