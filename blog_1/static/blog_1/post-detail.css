@@ -120,3 +120,59 @@ body {
     border-radius: 6px;
     border: 1px solid #ccc;
   }
+
+  
+  .errorlist {
+    list-style: none;
+    margin: 0.5rem 0;
+    padding: 0;
+    color: red;
+  }
+
+  .invalid input,
+  .invalide textarea {
+    border-color: red;
+    background-color: #ecdada;
+  }
+
+  .invalid label {
+    color:  red;
+  }
+
+  #alert {
+    margin: 8rem auto 3rem auto;
+    border: 1px solid red;
+    background-color: #ecdada;
+    padding: 1rem;
+    width: 90%;
+    max-width: 40rem;
+  }
+
+  #alert a {
+    background-color: red;
+    color: white;
+    border: 1px solid #d6000b;
+    text-decoration: none;
+    padding: 0.25rem 1.5rem;
+    border-radius: 5px;
+  }
+
+  .comment-replies {
+    background-color: white;
+    width: 80%;
+    margin: auto;
+    border-radius: 10px;
+    padding: 2rem;
+  }
+
+  .comment-replies ul {
+    list-style-type: none;
+  }
+
+  .comment-replies h2 {
+    margin-bottom: 0;
+  }
+
+  .comment-replies p {
+    margin-top: .25rem;
+  }

@@ -11,6 +11,14 @@
 
 {% block content %}
 
+    {% if comment_form.errors %}
+        <div id="alert">
+            <h2>There were errors with your comment!</h2>
+            <p>Please see your errors below and resubmit your comment</p>
+            <a href="#comment-form" >Click here to view error </a>
+        </div>
+    {% endif %}
+
     <section id="summary">
         <h2>{{ single_post.title}}</h2>
         <div>
@@ -31,12 +39,25 @@
         {{ single_post.content|linebreaks }}
     </main>
 
+    <section>
+        <div class="comment-replies">
+            <ul>
+                {% for comment in comments %}
+                    <li>
+                        <h2>{{ comment.user_name}}</h2>
+                        <p>{{ comment.text|linebreaks }} </p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
     <section id="comment-form">
         <h2>Your Comment</h2>
         <form action="{% url "post-detail-page" single_post.slug %}" method="POST">
             {% csrf_token %}
             {% for form_field in comment_form %}
-                <div class="form-control">
+                <div class="form-control {% if form_field.errors %}invalid{% endif %}">
                     {{ form_field.label_tag }}
                     {{ form_field }}
                     {{ form_field.errors}}
