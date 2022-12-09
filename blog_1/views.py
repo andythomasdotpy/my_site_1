@@ -52,19 +52,20 @@ class AllPostsView(ListView):
 
 # Now we create manual view to create our own logic
 class PostDetailView(View):
-    def func_context(self, post):
+    def func_context(self, post, comment_form):
         context = {
             "single_post": post,
             "get_tags": post.tags.all(),
-            "comment_form": CommentForm(),
+            "comment_form": comment_form,
             "comments": post.comments.all().order_by("-id"),     # in models.py we used related_name="comments" for post column
-        }
+        }        
         return context
 
-
     def get(self, request, slug):
+        comment_form = CommentForm()
         post = Post.objects.get(slug=slug)
-        context = self.func_context(post)
+
+        context = self.func_context(post, comment_form)
         return render(request, "blog_1/post-detail.html", context)
 
 
@@ -79,7 +80,7 @@ class PostDetailView(View):
 
             return HttpResponseRedirect(reverse("post-detail-page", args=[slug]))
 
-        context = self.func_context(post)
+        context = self.func_context(post, comment_form)
         return render(request, "blog_1/post-detail.html", context)
     
 
